@@ -1,0 +1,99 @@
+      
+      
+      // Define Weights
+      
+      float weight = Event_Weight[0]*10;
+      
+      
+      if (Muon_PT[0]<25.)continue;
+      if (Muon_PT[1]<25.)continue;
+      
+     
+
+      // TLorentzVector definitions
+      TLorentzVector MuW  = TLorentzVector();
+      TLorentzVector MuN  = TLorentzVector();
+      TLorentzVector MuW_MuN = TLorentzVector();
+      
+      MuW.SetPtEtaPhiM(Muon_PT[0], Muon_Eta[0], Muon_Phi[0],0.10566); //mass of muon un mev  
+      MuN.SetPtEtaPhiM(Muon_PT[1], Muon_Eta[1], Muon_Phi[1],0.10566);
+      
+      TLorentzVector Z = MuN + MuW;
+      
+        
+        
+      float InvMass_Z = Z.M();
+        
+        
+      if (InvMass_Z < 85 || InvMass_Z > 95) continue;
+      
+      
+      if (Z.Pt()<30.0) continue;
+      
+      int goodjet_index[kMaxJet];
+      int goodjet_n = 0;
+      
+      for (unsigned int j=0; j<kMaxJet; j++){
+        int goodtrack_n = 0;
+        
+        TLorentzVector jet  = TLorentzVector();
+        
+        jet.SetPtEtaPhiM(Jet_PT[j], Jet_Eta[j], Jet_Phi[j],Jet_Mass[j]);
+        
+        if (Jet_PT[j]<30.) continue;
+        if (TMath::Abs(Jet_Eta[j])>=2.5) continue;
+        for (unsigned int k = 0; k<kMaxTrack; k++){
+          Double_t deltaEta = TMath::Abs(Jet_Eta[j] - Track_Eta[k]);  
+          Double_t deltaPhi = TMath::Abs(Jet_Phi[j] - Track_Phi[k]);  
+          Double_t deltaR   = pow(deltaEta*deltaEta+deltaPhi*deltaPhi,0.5);
+          if (deltaR > 0.5)continue;
+          if (Track_PT[k] < 1.2 ) continue;
+          goodtrack_n++;
+        }
+        if(goodtrack_n < 1) continue;
+               
+        goodjet_index[goodjet_n] = j;
+        goodjet_n++;
+               
+      }
+      
+      //jet cut at least one good jet
+      if(goodjet_n < 1) continue;
+      for (int kMuon=0;kMuon<kMaxMuon;kMuon++){
+      if (Muon_Charge[kMuon]>0 )hist_Muplus_pt -> Fill(Muon_PT[kMuon]);
+      else hist_Muminus_pt -> Fill(Muon_PT[kMuon]);
+      }
+      
+      
+      TLorentzVector vm = MuN; 
+      
+      
+      
+      for (int index_jet=0; index_jet<goodjet_n;index_jet++){
+        TLorentzVector good_jet = TLorentzVector(); 
+        good_jet.SetPtEtaPhiM(Jet_PT[goodjet_index[index_jet]], Jet_Eta[goodjet_index[index_jet]], Jet_Phi[goodjet_index[index_jet]],Jet_Mass[goodjet_index[index_jet]]);
+        vm = vm+good_jet;      
+      }
+      
+      float invmass_N = vm.M();
+      N_invMass-> Fill(invmass_N*0.34);
+      
+      
+      for (int kMuon=0;kMuon<kMaxMuon;kMuon++){
+      if (Muon_Charge[kMuon]>0 ){
+        hist_Muplus_pt -> Fill(Muon_PT[kMuon],weight);
+        hist_Muplus_eta -> Fill(Muon_Eta[kMuon],weight);
+        hist_Muplus_phi -> Fill(Muon_Phi[kMuon],weight);
+        }
+      else  {
+        hist_Muminus_pt -> Fill(Muon_PT[kMuon],weight);
+        hist_Muminus_eta -> Fill(Muon_Eta[kMuon],weight);
+        hist_Muminus_phi -> Fill(Muon_Phi[kMuon],weight);
+        }
+      }
+      
+      hist_MuW_pt -> Fill(Muon_PT[0],weight);
+      hist_MuW_eta -> Fill(Muon_Eta[0],weight);
+      hist_MuW_phi -> Fill(Muon_Phi[0],weight);
+      
+      hist_jet_pt -> Fill(Jet_PT[goodjet_index[0]],weight); 

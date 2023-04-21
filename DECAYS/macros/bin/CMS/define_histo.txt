@@ -1,0 +1,20 @@
+   // declare histograms
+   TH1F *hist_Muplus_pt = new TH1F("pT for #mu +","pT for #mu +(GeV); (#mu +)pT(GeV); Events",50,20,70);
+   TH1F *hist_Muminus_pt = new TH1F("pT for #mu -","pT for #mu -(GeV); (#mu -)pT(GeV); Events",50,20,70);
+   TH1F *N_invMass = new TH1F("invMass for N","invMass for N(GeV); invMass N (GeV); Events",70,0,70);
+   TH1F *hist_MuW_pt = new TH1F("pT for #mu W","pT for #mu W(GeV); (#mu W)pT(GeV); Events",50,20,70);
+   TH1F *hist_MuN_pt = new TH1F("pT for #mu N","pT for #mu N(GeV); (#mu N)pT(GeV); Events",50,20,70);      
+   TH1F *hist_jet_pt = new TH1F("pT for Jets","pT for Jets; pT; Events",200,0,200);
+   
+   TH1F *hist_Muplus_eta = new TH1F("#eta for #mu +","#eta for #mu +; (#mu +)#eta; Events",40,-4,4);
+   TH1F *hist_Muminus_eta = new TH1F("#eta for #mu -","#eta for #mu -; (#mu -)#eta; Events",40,-4,4);
+   TH1F *hist_MuW_eta = new TH1F("#eta for #mu W","#eta for #mu W; (#mu W)#eta; Events",40,-4,4);
+   TH1F *hist_MuN_eta = new TH1F("#eta for #mu N","#eta for #mu N; (#mu N)#eta; Events",40,-4,4);      
+   TH1F *hist_jet_eta = new TH1F("#eta for Jets","#eta for Jets; #eta; Events",40,-4,4);
+   
+   TH1F *hist_Muplus_phi = new TH1F("#phi for #mu +","#phi for #mu +; (#mu +)#phi; Events",40,-4,4);
+   TH1F *hist_Muminus_phi = new TH1F("#phi for #mu -","#phi for #mu -; (#mu -)#phi; Events",40,-4,4);
+   TH1F *hist_MuW_phi = new TH1F("#phi for #mu W","#phi for #mu W; (#mu W)#phi; Events",40,-4,4);
+   TH1F *hist_MuN_phi = new TH1F("#phi for #mu N","#phi for #mu N; (#mu N)#phi; Events",40,-4,4);      
+   TH1F *hist_jet_phi = new TH1F("#phi for Jets","#phi for Jets; #phi; Events",40,-4,4);
+

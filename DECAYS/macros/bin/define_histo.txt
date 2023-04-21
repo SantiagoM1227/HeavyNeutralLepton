@@ -1,0 +1,8 @@
+   // declare histograms
+   TH1F *hist_Muplus_pt = new TH1F("pT for #mu +","pT for #mu +(GeV); (#mu +)pT(GeV); Events",50,20,70);
+   TH1F *hist_Muminus_pt = new TH1F("pT for #mu -","pT for #mu -(GeV); (#mu -)pT(GeV); Events",50,20,70);
+   TH1F *N_invMass = new TH1F("invMass for N","invMass for N(GeV); invMass N (GeV); Events",70,0,70);
+   TH1F *hist_MuW_pt = new TH1F("pT for #mu W","pT for #mu W(GeV); (#mu W)pT(GeV); Events",50,20,70);
+   TH1F *hist_MuN_pt = new TH1F("pT for #mu N","pT for #mu N(GeV); (#mu N)pT(GeV); Events",50,20,70);      
+   TH1F *hist_jet_pt = new TH1F("pT for Jets","pT for Jets; pT; Events",200,0,200);
+   
